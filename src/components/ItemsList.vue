@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export default {
     name: 'ItemsList',
     data() {
@@ -7,7 +7,7 @@
       }
     },
     methods: {
-      itemClick: (event) => {
+      itemClick: (event: Event) => {
         console.log(event)
       }
     }

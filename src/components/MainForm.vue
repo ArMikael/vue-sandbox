@@ -1,5 +1,19 @@
+<script lang="ts">
+  export default {
+    created: () => {
+      // this.formCreated();
+      console.log('created')
+    },
+    methods: {
+      formCreated: () => {
+        console.log('Form was created');
+      }
+    }
+  }
+</script>
+
 <template>
-  <h2>Form Component</h2>
+  <h2>Main Form Component</h2>
   <form>
     <input type="text" placeholder="Place enter text">
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Form from "@/components/Form.vue";
+import MainForm from "@/components/MainForm.vue";
 </script>
 
 <template>
   <div class="form-view">
-    <Form></Form>
+    <MainForm></MainForm>
   </div>
 </template>
 
