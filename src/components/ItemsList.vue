@@ -20,7 +20,7 @@
   </div>
 
   <ul class="list">
-    <li class="list__item" v-for="item of list">
+    <li class="list__item" v-for="item of list" :key="item">
       <a @click="itemClick">{{ item }}</a>
     </li>
   </ul>
