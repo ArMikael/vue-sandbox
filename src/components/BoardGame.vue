@@ -1,8 +1,8 @@
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: "BoardGame",
+  name: 'BoardGame',
   inject: ['boardGamesAmount'],
   data() {
     return {
@@ -10,7 +10,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log('total amount received: ', this.totalAmount)
+    console.log('total amount received: ', this.totalAmount);
   },
 });
 </script>
@@ -19,6 +19,4 @@ export default defineComponent({
   <div>{{ totalAmount }}</div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

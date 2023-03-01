@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import MainForm from "@/components/MainForm.vue";
+import MainForm from '@/components/MainForm.vue';
 </script>
 
 <template>
@@ -8,6 +8,4 @@ import MainForm from "@/components/MainForm.vue";
   </div>
 </template>
 
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>

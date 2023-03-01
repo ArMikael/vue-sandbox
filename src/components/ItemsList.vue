@@ -1,13 +1,13 @@
 <script lang="ts">
-import BoardGame from "@/components/BoardGame.vue";
-import {defineComponent} from "vue";
+import BoardGame from '@/components/BoardGame.vue';
+import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'ItemsList',
-  components: {BoardGame},
-  data(): { boardGamesList: Array<string>} {
+  components: { BoardGame },
+  data(): { boardGamesList: Array<string> } {
     return {
-      boardGamesList: ['Item 1' , 'Item 2', 'Item 3'],
+      boardGamesList: ['Item 1', 'Item 2', 'Item 3'],
     };
   },
   methods: {
@@ -24,9 +24,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="green">
-    Items List
-  </div>
+  <div class="green">Items List</div>
 
   <ul class="list">
     <li class="list__item" v-for="item of boardGamesList" :key="item">
@@ -37,7 +35,7 @@ export default defineComponent({
 </template>
 
 <style scoped lang="scss">
-  .green {
-    color: green;
-  }
+.green {
+  color: green;
+}
 </style>
