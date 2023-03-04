@@ -1,13 +1,15 @@
 <script lang="ts">
-import BoardGame from '@/components/BoardGame.vue';
 import { defineComponent } from 'vue';
+import { BoardGameMock } from "@/mock-data/board-game.mock";
+import type { BoardGameItem } from "@/types/types";
+import BoardGame from "@/components/BoardGame.vue";
 
 export default defineComponent({
   name: 'ItemsList',
   components: { BoardGame },
-  data(): { boardGamesList: Array<string> } {
+  data(): { boardGamesList: Array<BoardGameItem> } {
     return {
-      boardGamesList: ['Item 1', 'Item 2', 'Item 3'],
+      boardGamesList: [BoardGameMock, 'Item 2', 'Item 3'],
     };
   },
   methods: {
@@ -28,7 +30,7 @@ export default defineComponent({
 
   <ul class="list">
     <li class="list__item" v-for="item of boardGamesList" :key="item">
-      <BoardGame> </BoardGame>
+      <BoardGame board-game="item"></BoardGame>
       <a @click="itemClick">{{ item }}</a>
     </li>
   </ul>

@@ -10,12 +10,23 @@ export default defineComponent({
     };
   },
   mounted() {
-    console.log('total amount received: ', this.totalAmount);
+    console.log('boardGame: ', this.boardGame);
   },
+  props: ['boardGame']
 });
 </script>
 
 <template>
+  <div class="board-game">
+    <div class="board-game-cover">
+      <div class="board-gamer-cover-label"></div>
+      <img class="board-game-cover-image"
+           alt="{{this.boardGame}}"
+           src=""
+      />
+    </div>
+  </div>
+
   <div>{{ totalAmount }}</div>
 </template>
 
