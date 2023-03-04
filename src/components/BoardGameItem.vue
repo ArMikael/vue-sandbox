@@ -1,23 +1,24 @@
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
-import type { BoardGame } from "@/types/types"
+import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+import type { BoardGame } from '@/types/types';
 
 export default defineComponent({
   name: 'BoardGameItem',
   inject: ['boardGamesAmount'],
   data(): { totalAmount: Function } {
     return {
-      totalAmount: this.boardGamesAmount
+      totalAmount: this.boardGamesAmount,
     };
   },
   mounted() {
     console.log('boardGame: ', this.boardGame);
   },
   props: {
-      boardGame: {
-        type: Object as PropType<BoardGame>,
-        required: true
-      }
+    boardGame: {
+      type: Object as PropType<BoardGame>,
+      required: true,
+    },
   },
 });
 </script>
@@ -29,10 +30,10 @@ export default defineComponent({
         {{ boardGame.title }}
       </h2>
 
-      <img class="board-game-item-cover-image"
-           alt="{{ boardGame.title }}"
-           :src="'src/assets/images/covers/' + boardGame.coverImage"
-      />
+      <img
+        class="board-game-item-cover-image"
+        alt="{{ boardGame.title }}"
+        :src="'src/assets/images/covers/' + boardGame.coverImage" />
 
       <div class="board-game-designer">
         <span class="board-game-item-designer" v-for="(designer, index) of boardGame.designers" :key="designer">
