@@ -1,4 +1,4 @@
-export type BoardGameItem = {
+export type BoardGame = {
   artists: Array<string>;
   coverImage: string;
   description: string;

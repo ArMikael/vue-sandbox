@@ -1,15 +1,15 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { BoardGameMock } from "@/mock-data/board-game.mock";
-import type { BoardGameItem } from "@/types/types";
-import BoardGame from "@/components/BoardGame.vue";
+import type { BoardGame } from "@/types/types";
+import BoardGameItem from "./BoardGameItem.vue";
 
 export default defineComponent({
   name: 'ItemsList',
-  components: { BoardGame },
-  data(): { boardGamesList: Array<BoardGameItem> } {
+  components: { BoardGameItem },
+  data(): { boardGamesList: Array<BoardGame> } {
     return {
-      boardGamesList: [BoardGameMock, 'Item 2', 'Item 3'],
+      boardGamesList: [BoardGameMock, BoardGameMock, BoardGameMock],
     };
   },
   methods: {
@@ -29,9 +29,9 @@ export default defineComponent({
   <div class="green">Items List</div>
 
   <ul class="list">
-    <li class="list__item" v-for="item of boardGamesList" :key="item">
-      <BoardGame board-game="item"></BoardGame>
-      <a @click="itemClick">{{ item }}</a>
+    <li class="list__item" v-for="boardGame of boardGamesList" :key="boardGame.id">
+      <BoardGameItem :board-game="boardGame"></BoardGameItem>
+      <a @click="itemClick">{{ boardGame.title }}</a>
     </li>
   </ul>
 </template>
