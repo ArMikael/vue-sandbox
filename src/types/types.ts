@@ -1,3 +1,5 @@
+import type { BoardGameSaleStatus } from './enums';
+
 export type BoardGame = {
   artists: Array<string>;
   coverImage: string;
@@ -8,6 +10,7 @@ export type BoardGame = {
   publisher: string;
   publishedAt: string;
   slogan?: string;
+  saleStatus: BoardGameSaleStatus;
   title: string;
 };
 

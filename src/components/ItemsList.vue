@@ -28,8 +28,8 @@ export default defineComponent({
 <template>
   <div class="green">Items List</div>
 
-  <ul class="list">
-    <li class="list__item" v-for="boardGame of boardGamesList" :key="boardGame.id">
+  <ul class="bg-list">
+    <li class="bg-list__item" v-for="boardGame of boardGamesList" :key="boardGame.id">
       <BoardGameItem :board-game="boardGame"></BoardGameItem>
       <a @click="itemClick">{{ boardGame.title }}</a>
     </li>
@@ -37,6 +37,11 @@ export default defineComponent({
 </template>
 
 <style scoped lang="scss">
+.bg-list {
+  display: flex;
+  list-style: none;
+}
+
 .green {
   color: green;
 }
