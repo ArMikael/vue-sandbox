@@ -1,4 +1,5 @@
 import type { BoardGame } from '@/types/types';
+import { BoardGameSaleStatus } from '@/types/enums';
 
 export const BoardGameMock: BoardGame = {
   artists: ['Jan Lipiński'],
@@ -10,6 +11,7 @@ export const BoardGameMock: BoardGame = {
   images: [],
   publisher: 'Splotter Spellen',
   publishedAt: '2023',
+  saleStatus: BoardGameSaleStatus.Available,
   slogan: 'Aspiring industrialists build and sell new, expensive, utterly unfamiliar carriages',
   title: 'Horseless Carriage',
 };

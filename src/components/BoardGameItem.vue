@@ -30,10 +30,16 @@ export default defineComponent({
         {{ boardGame.title }}
       </h2>
 
-      <img
-        class="board-game-item-cover-image"
-        alt="{{ boardGame.title }}"
-        :src="'src/assets/images/covers/' + boardGame.coverImage" />
+      <div class="board-game-cover-container">
+        <div class="board-game-item-cover-status">
+          {{ boardGame.status }}
+        </div>
+        <img
+          v-if="boardGame.coverImage"
+          class="board-game-item-cover-image"
+          :alt="boardGame.title"
+          :src="'src/assets/images/covers/' + boardGame.coverImage" />
+      </div>
 
       <div class="board-game-designer">
         <span class="board-game-item-designer" v-for="(designer, index) of boardGame.designers" :key="designer">
@@ -41,7 +47,6 @@ export default defineComponent({
         </span>
       </div>
       <div>{{ boardGame.publishedAt }}</div>
-      <div class="board-game-item-cover-label"></div>
     </div>
   </div>
 </template>
