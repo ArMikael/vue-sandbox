@@ -3,7 +3,7 @@ import type { BoardGameSaleStatus } from './enums';
 export type BoardGame = {
   artists: Array<string>;
   coverImage: string;
-  description: string;
+  description: Array<string>;
   designers: Array<string>;
   id: string;
   images: Array<string>;

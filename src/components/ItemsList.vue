@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { BoardGameMock } from "@/mock-data/board-game.mock";
+import { BoardGameMock, BoardGameMock2 } from "@/mock-data/board-game.mock";
 import type { BoardGame } from "@/types/types";
 import BoardGameItem from "./BoardGameItem.vue";
 
@@ -9,7 +9,7 @@ export default defineComponent({
   components: { BoardGameItem },
   data(): { boardGamesList: Array<BoardGame> } {
     return {
-      boardGamesList: [BoardGameMock, BoardGameMock, BoardGameMock],
+      boardGamesList: [BoardGameMock, BoardGameMock2, BoardGameMock],
     };
   },
   methods: {
