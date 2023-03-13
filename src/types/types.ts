@@ -1,5 +1,10 @@
 import type { BoardGameSaleStatus } from './enums';
 
+export type SelectOption = {
+  value: string;
+  name: string;
+};
+
 export type BoardGame = {
   artists: Array<string>;
   coverImage: string;

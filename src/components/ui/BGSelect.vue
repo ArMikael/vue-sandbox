@@ -9,6 +9,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import type { PropType } from 'vue';
+import type { SelectOption } from '@/types/types';
 
 export default defineComponent({
   name: 'bg-select',
@@ -17,8 +19,8 @@ export default defineComponent({
       type: String,
     },
     optionsList: {
-      type: Array,
-      default: () => [],
+      type: Object as PropType<Array<SelectOption>>,
+      // default: () => [{ value: '', name: '' }],
     },
   },
   methods: {
