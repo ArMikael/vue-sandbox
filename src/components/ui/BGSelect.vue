@@ -14,9 +14,15 @@ import type { SelectOption } from '@/types/types';
 
 export default defineComponent({
   name: 'bg-select',
+  data() {
+    return {
+      modelValue: this.selectModelValue,
+    };
+  },
   props: {
-    modelValue: {
+    selectModelValue: {
       type: String,
+      value: 'saleStatus',
     },
     optionsList: {
       type: Object as PropType<Array<SelectOption>>,

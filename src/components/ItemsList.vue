@@ -1,6 +1,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { BoardGameMock, BoardGameMock2 } from '@/mock-data/board-game.mock';
+import { BoardGameMock, BoardGameMock2, BoardGameMock3 } from '@/mock-data/board-game.mock';
 import type { BoardGame, SelectOption } from '@/types/types';
 import BoardGameItem from './BoardGameItem.vue';
 import BgSelect from './ui/BGSelect.vue';
@@ -14,8 +14,8 @@ export default defineComponent({
     sortOptions: Array<SelectOption>;
   } {
     return {
-      boardGamesList: [BoardGameMock, BoardGameMock2, BoardGameMock],
-      selectedSort: '',
+      boardGamesList: [BoardGameMock, BoardGameMock2, BoardGameMock3],
+      selectedSort: 'saleStatus',
       sortOptions: [
         { value: 'title', name: 'Title' },
         { value: 'saleStatus', name: 'Status' },
@@ -25,6 +25,11 @@ export default defineComponent({
   methods: {
     itemClick(event: Event) {
       console.log(event);
+    },
+  },
+  watch: {
+    selectedSort(newValue) {
+      console.log(newValue);
     },
   },
   provide() {
