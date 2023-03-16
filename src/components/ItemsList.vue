@@ -62,17 +62,20 @@ export default defineComponent({
 
   <ul class="bg-list">
     <li class="bg-list__item" v-for="boardGame of boardGamesList" :key="boardGame.id">
-      <BoardGameItem :board-game="boardGame"></BoardGameItem>
-      <a @click="itemClick">{{ boardGame.title }}</a>
+      <transition-group name="bg-list">
+        <BoardGameItem :board-game="boardGame" :key="boardGame.id" @click="itemClick"></BoardGameItem>
+      </transition-group>
     </li>
   </ul>
 
   <div class="computed-list-container">
     <h3>Computed list</h3>
     <ul class="short-list">
-      <li class="short-list-item" v-for="boardGame of sortedBoardGames" :key="boardGame.id">
-        {{ boardGame.title }} - {{ boardGame.id }}
-      </li>
+      <transition-group name="short-bg-list">
+        <li class="short-list-item" v-for="boardGame of sortedBoardGames" :key="boardGame.id">
+          {{ boardGame.title }} - {{ boardGame.id }}
+        </li>
+      </transition-group>
     </ul>
   </div>
 </template>
@@ -89,5 +92,26 @@ export default defineComponent({
 
 .computed-list-container {
   margin-top: 80px;
+}
+
+.short-bg-list-item {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.short-bg-list-enter-active,
+.short-bg-list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.short-bg-list-enter-from,
+.short-bg-list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.bg-list-move,
+.short-bg-list-move {
+  transition: transform 0.5s ease;
 }
 </style>
