@@ -28,8 +28,12 @@ export default defineComponent({
     },
   },
   watch: {
-    selectedSort(newValue) {
-      console.log(newValue);
+    selectedSort(newValue: string) {
+      this.boardGamesList.sort((item1, item2) => {
+        return (item1[newValue as keyof BoardGame] as string)?.localeCompare(
+          item2[newValue as keyof BoardGame] as string
+        );
+      });
     },
   },
   provide() {
