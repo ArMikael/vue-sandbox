@@ -27,6 +27,15 @@ export default defineComponent({
       console.log(event);
     },
   },
+  computed: {
+    sortedBoardGames() {
+      return [...this.boardGamesList].sort((item1, item2) => {
+        return (item1[this.selectedSort as keyof BoardGame] as string)?.localeCompare(
+          item2[this.selectedSort as keyof BoardGame] as string
+        );
+      });
+    },
+  },
   watch: {
     selectedSort(newValue: string) {
       this.boardGamesList.sort((item1, item2) => {
@@ -57,6 +66,15 @@ export default defineComponent({
       <a @click="itemClick">{{ boardGame.title }}</a>
     </li>
   </ul>
+
+  <div class="computed-list-container">
+    <h3>Computed list</h3>
+    <ul class="short-list">
+      <li class="short-list-item" v-for="boardGame of sortedBoardGames" :key="boardGame.id">
+        {{ boardGame.title }} - {{ boardGame.id }}
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -67,5 +85,9 @@ export default defineComponent({
 
 .green {
   color: green;
+}
+
+.computed-list-container {
+  margin-top: 80px;
 }
 </style>
