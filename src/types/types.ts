@@ -27,3 +27,10 @@ export type BGGBoardGame = BoardGame & {
   playingTimeMax: number;
   ratingsAmount: number;
 };
+
+export type Post = {
+  id: number;
+  body: string;
+  title: string;
+  userId: number;
+};

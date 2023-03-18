@@ -7,6 +7,7 @@ import { RouterLink, RouterView } from 'vue-router';
     <div class="wrapper">
       <nav>
         <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/posts">Posts</RouterLink>
         <RouterLink to="/form">Form</RouterLink>
       </nav>
     </div>
@@ -66,15 +67,6 @@ nav a:first-of-type {
     display: flex;
     place-items: flex-start;
     flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
   }
 }
 </style>
