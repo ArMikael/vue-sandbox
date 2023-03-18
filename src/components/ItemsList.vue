@@ -4,18 +4,21 @@ import { BoardGameMock, BoardGameMock2, BoardGameMock3 } from '@/mock-data/board
 import type { BoardGame, SelectOption } from '@/types/types';
 import BoardGameItem from './BoardGameItem.vue';
 import BgSelect from './ui/BGSelect.vue';
+import TextInput from './ui/TextInput.vue';
 
 export default defineComponent({
   name: 'ItemsList',
-  components: { BgSelect, BoardGameItem },
+  components: { TextInput, BgSelect, BoardGameItem },
   data(): {
     boardGamesList: Array<BoardGame>;
     selectedSort: string;
+    searchQuery: string;
     sortOptions: Array<SelectOption>;
   } {
     return {
       boardGamesList: [BoardGameMock, BoardGameMock2, BoardGameMock3],
       selectedSort: 'saleStatus',
+      searchQuery: '',
       sortOptions: [
         { value: 'title', name: 'Title' },
         { value: 'saleStatus', name: 'Status' },
@@ -34,6 +37,11 @@ export default defineComponent({
           item2[this.selectedSort as keyof BoardGame] as string
         );
       });
+    },
+    sortedAndFilteredBoardGames() {
+      return this.sortedBoardGames.filter(boardGame =>
+        boardGame.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
     },
   },
   watch: {
@@ -70,9 +78,13 @@ export default defineComponent({
 
   <div class="computed-list-container">
     <h3>Computed list</h3>
+    <div class="search-panel">
+      <TextInput v-model="searchQuery" :placeholder="'Search...'"></TextInput>
+    </div>
+
     <ul class="short-list">
       <transition-group name="short-bg-list">
-        <li class="short-list-item" v-for="boardGame of sortedBoardGames" :key="boardGame.id">
+        <li class="short-list-item" v-for="boardGame of sortedAndFilteredBoardGames" :key="boardGame.id">
           {{ boardGame.title }} - {{ boardGame.id }}
         </li>
       </transition-group>
