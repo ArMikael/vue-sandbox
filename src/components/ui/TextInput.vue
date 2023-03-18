@@ -28,7 +28,7 @@ export default defineComponent({
 
 <template>
   <div class="text-input">
-    <input type="text" v-model="modelValue" @input="inputChanged" :placeholder="this.placeholder" />
+    <input type="text" v-model="modelValue" @input="inputChanged" :placeholder="placeholder" />
   </div>
 </template>
 
