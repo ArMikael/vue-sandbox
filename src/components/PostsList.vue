@@ -20,6 +20,20 @@ export default defineComponent({
   },
   mounted() {
     this.getPosts();
+
+    const options = {
+      rootMargin: '0px',
+      threshold: 1.0,
+    };
+
+    const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+      if (entries[0].isIntersecting && this.page < this.totalPages) {
+        console.log(entries);
+        this.loadMorePosts();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.pageEndObserver as HTMLDivElement);
   },
   methods: {
     async getPosts() {
@@ -37,10 +51,30 @@ export default defineComponent({
         console.error('getPosts error: ', error);
       }
     },
+    async loadMorePosts() {
+      try {
+        this.page++;
+        const response = await axios.get('https://jsonplaceholder.typicode.com/posts/', {
+          params: {
+            _page: this.page,
+            _limit: this.limit,
+          },
+        });
+
+        this.totalPages = Math.ceil(response.headers['x-total-count'] / this.limit);
+        this.postsList = [...this.postsList, ...response.data];
+      } catch (error) {
+        console.error('loadMorePosts error: ', error);
+      }
+    },
     goToPage(pageNumber: number) {
       this.page = pageNumber;
-      this.getPosts();
     },
+  },
+  watch: {
+    // page() {
+    //   this.getPosts();
+    // },
   },
 });
 </script>
@@ -48,7 +82,12 @@ export default defineComponent({
 <template>
   <div class="posts-list-component">
     <ul class="post-list">
-      <li class="post-item" v-for="post in postsList" :key="post.id">{{ post.id }} - {{ post.title }}</li>
+      <li class="post-item" v-for="post in postsList" :key="post.id">
+        <div class="post-title">{{ post.id }} - {{ post.title }}</div>
+        <div class="post-body">
+          {{ post.body }}
+        </div>
+      </li>
     </ul>
 
     <div class="pages-nav-panel">
@@ -65,6 +104,8 @@ export default defineComponent({
         </li>
       </ul>
     </div>
+
+    <div ref="pageEndObserver" class="page-end-observer"></div>
   </div>
 </template>
 
@@ -72,6 +113,13 @@ export default defineComponent({
 .post-list {
   list-style-type: none;
   padding: 0;
+}
+
+.post-item {
+  margin-bottom: 20px;
+  padding: 8px 12px;
+  border: 1px solid darkgray;
+  border-radius: 6px;
 }
 
 .pages-nav-panel {
@@ -97,5 +145,9 @@ export default defineComponent({
     border: 1px solid cornflowerblue;
     background-color: lightskyblue;
   }
+}
+
+.page-end-observer {
+  height: 30px;
 }
 </style>
