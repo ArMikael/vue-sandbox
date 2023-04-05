@@ -71,6 +71,7 @@ export default defineComponent({
 <style lang="scss">
 .post-list {
   list-style-type: none;
+  padding: 0;
 }
 
 .pages-nav-panel {
@@ -81,6 +82,7 @@ export default defineComponent({
   list-style-type: none;
   display: flex;
   flex-direction: row;
+  padding: 0;
 }
 
 .page-control {
