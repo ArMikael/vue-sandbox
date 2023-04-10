@@ -83,7 +83,7 @@ export default defineComponent({
 
 <template>
   <div class="posts-list-component">
-    <div class="likes-counter">Likes: {{ $store.state.posts.likes }}</div>
+    <div class="likes-counter">Likes: {{ $store?.state?.posts?.likes }}</div>
 
     <ul class="post-list">
       <li class="post-item" v-for="post in postsList" :key="post.id">
