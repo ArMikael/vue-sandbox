@@ -2,9 +2,11 @@
 import { defineComponent } from 'vue';
 import axios from 'axios';
 import type { Post } from '@/types/types';
+import ToggleMixin from '@/mixins/ToggleMixin';
 
 export default defineComponent({
   name: 'PostsList',
+  mixins: [ToggleMixin],
   data(): {
     postsList: Array<Post>;
     page: number;
