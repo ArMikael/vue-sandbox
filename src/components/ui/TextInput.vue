@@ -27,9 +27,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <div class="text-input">
-    <input type="text" v-model="modelValue" @input="inputChanged" :placeholder="placeholder" />
-  </div>
+  <input class="text-input" type="text" v-model="modelValue" @input="inputChanged" :placeholder="placeholder" />
 </template>
 
 <style lang="scss"></style>

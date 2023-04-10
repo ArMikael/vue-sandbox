@@ -79,7 +79,7 @@ export default defineComponent({
   <div class="computed-list-container">
     <h3>Computed list</h3>
     <div class="search-panel">
-      <TextInput v-model="searchQuery" :placeholder="'Search...'"></TextInput>
+      <TextInput v-model="searchQuery" v-focus :placeholder="'Search...'"></TextInput>
     </div>
 
     <ul class="short-list">
