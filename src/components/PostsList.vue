@@ -1,3 +1,11 @@
+<script setup lang="ts">
+import { usePostStore } from '@/stores/PostStore';
+import { storeToRefs } from 'pinia';
+
+const postStore = usePostStore();
+const { likes, limit, page, postsList, totalPages } = storeToRefs(postStore);
+</script>
+
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios';
@@ -7,19 +15,19 @@ import ToggleMixin from '@/mixins/ToggleMixin';
 export default defineComponent({
   name: 'PostsList',
   mixins: [ToggleMixin],
-  data(): {
-    postsList: Array<Post>;
-    page: number;
-    limit: number;
-    totalPages: number;
-  } {
-    return {
-      postsList: [],
-      page: 1,
-      limit: 10,
-      totalPages: 0,
-    };
-  },
+  // data(): {
+  //   postsList: Array<Post>;
+  //   page: number;
+  //   limit: number;
+  //   totalPages: number;
+  // } {
+  //   return {
+  //     postsList: [],
+  //     page: 1,
+  //     limit: 10,
+  //     totalPages: 0,
+  //   };
+  // },
   mounted() {
     this.getPosts();
 
@@ -83,7 +91,7 @@ export default defineComponent({
 
 <template>
   <div class="posts-list-component">
-    <div class="likes-counter">Likes: {{ $store?.state?.posts?.likes }}</div>
+    <div class="likes-counter">Likes: {{ likes }}</div>
 
     <ul class="post-list">
       <li class="post-item" v-for="post in postsList" :key="post.id">
