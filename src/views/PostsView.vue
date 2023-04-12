@@ -1,14 +1,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import PostsList from '../components/PostsList.vue';
+import PostList from '../components/PostList.vue';
 
 export default defineComponent({
-  components: { PostsList },
+  components: { PostList },
 });
 </script>
 
 <template>
   <div class="posts-view">
-    <PostsList></PostsList>
+    <PostList></PostList>
   </div>
 </template>
