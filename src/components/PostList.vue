@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import { storeToRefs } from 'pinia';
 import ToggleMixin from '@/mixins/ToggleMixin';
-
 import { usePostStore } from '@/stores/PostStore';
 import { defineComponent, onMounted } from 'vue';
-import { ref } from 'vue';
 const postStore = usePostStore();
-
-const { likes, page, postsList, totalPages } = storeToRefs(postStore);
+const { page, postsList, totalPages } = storeToRefs(postStore);
 
 postStore.fetchPosts();
 
@@ -15,23 +12,12 @@ const goToPage = (pageNumber: number) => {
   postStore.getPage(pageNumber);
 };
 
-const pageEndObserver = ref(null);
+const loadMore = () => {
+  if (!postsList.value.length) return;
+  postStore.loadMorePosts();
+};
 
-onMounted(() => {
-  const options = {
-    rootMargin: '0px',
-    threshold: 1.0,
-  };
-
-  const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-    if (entries[0].isIntersecting && page < totalPages) {
-      console.log(entries);
-      // this.loadMorePosts();
-    }
-  };
-  const observer = new IntersectionObserver(callback, options);
-  // observer.observe(pageEndObserver as HTMLDivElement);
-});
+onMounted(() => {});
 
 defineComponent({
   name: 'PostsList',
@@ -46,19 +32,6 @@ defineComponent({
 
 <template>
   <div class="posts-list-component">
-    <div class="likes-counter">Likes: {{ likes }}</div>
-
-    <div>{{ postsList.length }}</div>
-
-    <ul class="post-list">
-      <li class="post-item" v-for="post in postsList" :key="post.id">
-        <div class="post-title">{{ post.id }} - {{ post.title }}</div>
-        <div class="post-body">
-          {{ post.body }}
-        </div>
-      </li>
-    </ul>
-
     <div class="pages-nav-panel">
       <ul class="page-controls-list">
         <li
@@ -74,7 +47,16 @@ defineComponent({
       </ul>
     </div>
 
-    <div ref="pageEndObserver" class="page-end-observer"></div>
+    <ul class="post-list">
+      <li class="post-item" v-for="post in postsList" :key="post.id">
+        <div class="post-title">{{ post.id }} - {{ post.title }}</div>
+        <div class="post-body">
+          {{ post.body }}
+        </div>
+      </li>
+    </ul>
+
+    <div v-intersection="loadMore" class="page-end-observer"></div>
   </div>
 </template>
 
@@ -92,7 +74,7 @@ defineComponent({
 }
 
 .pages-nav-panel {
-  margin-top: 40px;
+  margin: 20px 0;
 }
 
 .page-controls-list {
