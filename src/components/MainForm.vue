@@ -1,37 +1,28 @@
-<script lang="ts">
-import { defineComponent } from 'vue';
+<script setup lang="ts">
+import { onMounted, ref, watch } from 'vue';
+import type { Ref } from 'vue';
 
-export default defineComponent({
-  created: () => {
-    // this.formCreated();
-    console.log('created');
-  },
-  methods: {
-    formCreated() {
-      console.log('Form was created');
-    },
-  },
+const city: Ref = ref('');
+
+watch(city, async (newValue, oldValue) => {
+  console.log('city change: ', newValue, oldValue);
+});
+
+onMounted(() => {
+  console.log('mounted');
 });
 </script>
 
 <template>
   <h2>Main Form Component</h2>
   <form>
-    <input type="text" placeholder="Place enter text" />
+    <input v-model="city" type="text" placeholder="Place enter text" />
 
     <v-autocomplete
       clearable
       label="Autocomplete"
-      :items="[
-        'California',
-        'Colorado',
-        'Florida',
-        'Georgia',
-        'Texas',
-        'Wyoming',
-      ]"
-      multiple
-    >
+      :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+      multiple>
     </v-autocomplete>
   </form>
 </template>
