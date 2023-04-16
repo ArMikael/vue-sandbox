@@ -1,6 +1,5 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { BoardGameMock, BoardGameMock2, BoardGameMock3 } from '@/mock-data/board-game.mock';
 import type { BoardGame, SelectOption } from '@/types/types';
 import BoardGameItem from './BoardGameItem.vue';
 import BgSelect from './ui/BGSelect.vue';
@@ -34,15 +33,8 @@ export default defineComponent({
     },
   },
   computed: {
-    sortedBoardGames() {
-      return [...this.boardGamesStore.boardGamesList].sort((item1, item2) => {
-        return (item1[this.selectedSort as keyof BoardGame] as string)?.localeCompare(
-          item2[this.selectedSort as keyof BoardGame] as string
-        );
-      });
-    },
     sortedAndFilteredBoardGames() {
-      return this.sortedBoardGames.filter(boardGame =>
+      return this.boardGamesStore.sortedBoardGames.filter(boardGame =>
         boardGame.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
@@ -68,7 +60,10 @@ export default defineComponent({
   <div class="green">Items List</div>
 
   <div class="sort-panel">
-    <bg-select v-model="selectedSort" :options-list="sortOptions"></bg-select>
+    <bg-select
+      v-model="selectedSort"
+      :options-list="sortOptions"
+      @change="boardGamesStore.setSortType(selectedSort)"></bg-select>
   </div>
 
   <ul class="bg-list">
