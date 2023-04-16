@@ -5,18 +5,21 @@ import type { BoardGame, SelectOption } from '@/types/types';
 import BoardGameItem from './BoardGameItem.vue';
 import BgSelect from './ui/BGSelect.vue';
 import TextInput from './ui/TextInput.vue';
+import { useBoardGamesStore } from '@/stores/BoardGamesStore';
 
 export default defineComponent({
   name: 'ItemsList',
   components: { TextInput, BgSelect, BoardGameItem },
+  setup() {
+    const boardGamesStore = useBoardGamesStore();
+    return { boardGamesStore };
+  },
   data(): {
-    boardGamesList: Array<BoardGame>;
     selectedSort: string;
     searchQuery: string;
     sortOptions: Array<SelectOption>;
   } {
     return {
-      boardGamesList: [BoardGameMock, BoardGameMock2, BoardGameMock3],
       selectedSort: 'saleStatus',
       searchQuery: '',
       sortOptions: [
@@ -32,7 +35,7 @@ export default defineComponent({
   },
   computed: {
     sortedBoardGames() {
-      return [...this.boardGamesList].sort((item1, item2) => {
+      return [...this.boardGamesStore.boardGamesList].sort((item1, item2) => {
         return (item1[this.selectedSort as keyof BoardGame] as string)?.localeCompare(
           item2[this.selectedSort as keyof BoardGame] as string
         );
@@ -46,7 +49,7 @@ export default defineComponent({
   },
   watch: {
     selectedSort(newValue: string) {
-      this.boardGamesList.sort((item1, item2) => {
+      this.boardGamesStore.boardGamesList.sort((item1, item2) => {
         return (item1[newValue as keyof BoardGame] as string)?.localeCompare(
           item2[newValue as keyof BoardGame] as string
         );
@@ -55,7 +58,7 @@ export default defineComponent({
   },
   provide() {
     return {
-      boardGamesAmount: this.boardGamesList.length,
+      boardGamesAmount: this.boardGamesStore.boardGamesList.length,
     };
   },
 });
@@ -69,7 +72,7 @@ export default defineComponent({
   </div>
 
   <ul class="bg-list">
-    <li class="bg-list__item" v-for="boardGame of boardGamesList" :key="boardGame.id">
+    <li class="bg-list__item" v-for="boardGame of boardGamesStore.boardGamesList" :key="boardGame.id">
       <transition-group name="bg-list">
         <BoardGameItem :board-game="boardGame" :key="boardGame.id" @click="itemClick"></BoardGameItem>
       </transition-group>

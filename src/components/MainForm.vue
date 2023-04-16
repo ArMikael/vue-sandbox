@@ -18,11 +18,11 @@ onMounted(() => {
   <form>
     <input v-model="city" type="text" placeholder="Place enter text" />
 
-    <v-autocomplete
-      clearable
-      label="Autocomplete"
-      :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-      multiple>
-    </v-autocomplete>
+    <!--    <v-autocomplete-->
+    <!--      clearable-->
+    <!--      label="Autocomplete"-->
+    <!--      :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"-->
+    <!--      multiple>-->
+    <!--    </v-autocomplete>-->
   </form>
 </template>

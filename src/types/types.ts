@@ -12,6 +12,7 @@ export type BoardGame = {
   designers: Array<string>;
   id: string;
   images: Array<string>;
+  isFavorite?: boolean;
   publisher: string;
   publishedAt: string;
   slogan?: string;
