@@ -42,6 +42,8 @@ export default defineComponent({
           @click="boardGamesStore.toggleFavorite(boardGame.id)">
           favorite
         </i>
+        <i class="material-icons delete-icon" @click="boardGamesStore.deleteBoardGame(boardGame.id)"> delete </i>
+
         <div class="board-game-item-cover-status">
           {{ boardGame.saleStatus }}
         </div>
@@ -95,16 +97,24 @@ export default defineComponent({
     margin-right: auto;
   }
 
-  .favorite-icon {
+  .material-icons {
     position: absolute;
-    top: 2px;
-    right: 2px;
     user-select: none;
     cursor: pointer;
+  }
+
+  .favorite-icon {
+    top: 2px;
+    right: 2px;
 
     &--active {
       color: deeppink;
     }
+  }
+
+  .delete-icon {
+    top: 2px;
+    left: 2px;
   }
 }
 </style>

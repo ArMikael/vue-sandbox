@@ -11,6 +11,7 @@ export default defineComponent({
   components: { TextInput, BgSelect, BoardGameItem },
   setup() {
     const boardGamesStore = useBoardGamesStore();
+    boardGamesStore.getBoardGames();
     return { boardGamesStore };
   },
   data(): {

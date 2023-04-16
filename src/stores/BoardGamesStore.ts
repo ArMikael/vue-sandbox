@@ -1,17 +1,19 @@
 import { defineStore } from 'pinia';
-import { BoardGameMock, BoardGameMock2, BoardGameMock3 } from '@/mock-data/board-game.mock';
 import type { BoardGame } from '@/types/types';
+import axios from 'axios';
 
 type BoardGamesStoreState = {
   boardGamesList: Array<BoardGame>;
   isFavorite: boolean;
+  isLoading: boolean;
   sortType: string;
 };
 
 export const useBoardGamesStore = defineStore('boardGamesStore', {
   state: (): BoardGamesStoreState => ({
-    boardGamesList: [BoardGameMock, BoardGameMock2, BoardGameMock3],
+    boardGamesList: [],
     isFavorite: false,
+    isLoading: false,
     sortType: 'saleStatus',
   }),
   getters: {
@@ -24,6 +26,18 @@ export const useBoardGamesStore = defineStore('boardGamesStore', {
     },
   },
   actions: {
+    async getBoardGames() {
+      this.isLoading = true;
+      const response = await axios.get('http://localhost:3000/boardGames', {});
+      this.boardGamesList = response.data;
+      this.isLoading = false;
+    },
+    async deleteBoardGame(id: string) {
+      this.boardGamesList = this.boardGamesList.filter(bg => bg.id !== id);
+
+      const response = await axios.delete('http://localhost:3000/boardGames/' + id);
+      if (response.data.error) console.error('deleteBoardGame error: ', response.data.error);
+    },
     setSortType(sortType: string) {
       this.sortType = sortType;
     },
