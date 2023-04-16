@@ -35,14 +35,14 @@ export default defineComponent({
   },
   computed: {
     sortedAndFilteredBoardGames() {
-      return this.boardGamesStore.sortedBoardGames.filter(boardGame =>
+      return this.boardGamesStore?.sortedBoardGames.filter(boardGame =>
         boardGame.title.toLowerCase().includes(this.searchQuery.toLowerCase())
       );
     },
   },
   watch: {
     selectedSort(newValue: string) {
-      this.boardGamesStore.boardGamesList.sort((item1, item2) => {
+      this.boardGamesStore?.boardGamesList.sort((item1, item2) => {
         return (item1[newValue as keyof BoardGame] as string)?.localeCompare(
           item2[newValue as keyof BoardGame] as string
         );
@@ -51,7 +51,7 @@ export default defineComponent({
   },
   provide() {
     return {
-      boardGamesAmount: this.boardGamesStore.boardGamesList.length,
+      boardGamesAmount: this.boardGamesStore?.boardGamesList.length,
     };
   },
 });
@@ -68,7 +68,7 @@ export default defineComponent({
   </div>
 
   <ul class="bg-list">
-    <li class="bg-list__item" v-for="boardGame of boardGamesStore.boardGamesList" :key="boardGame.id">
+    <li class="bg-list__item" v-for="boardGame of boardGamesStore?.boardGamesList" :key="boardGame.id">
       <transition-group name="bg-list">
         <BoardGameItem :board-game="boardGame" :key="boardGame.id" @click="itemClick"></BoardGameItem>
       </transition-group>

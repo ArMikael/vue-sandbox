@@ -9,6 +9,8 @@ type BoardGamesStoreState = {
   sortType: string;
 };
 
+export const baseUrl = 'http://localhost:3000/boardGames';
+
 export const useBoardGamesStore = defineStore('boardGamesStore', {
   state: (): BoardGamesStoreState => ({
     boardGamesList: [],
@@ -28,22 +30,28 @@ export const useBoardGamesStore = defineStore('boardGamesStore', {
   actions: {
     async getBoardGames() {
       this.isLoading = true;
-      const response = await axios.get('http://localhost:3000/boardGames', {});
+      const response = await axios.get(baseUrl, {});
       this.boardGamesList = response.data;
       this.isLoading = false;
     },
     async deleteBoardGame(id: string) {
       this.boardGamesList = this.boardGamesList.filter(bg => bg.id !== id);
 
-      const response = await axios.delete('http://localhost:3000/boardGames/' + id);
+      const response = await axios.delete(baseUrl + '/' + id);
       if (response.data.error) console.error('deleteBoardGame error: ', response.data.error);
     },
     setSortType(sortType: string) {
       this.sortType = sortType;
     },
-    toggleFavorite(id: string) {
+    async toggleFavorite(id: string) {
       const boardGame = this.boardGamesList.find(bg => bg.id === id);
       boardGame!.isFavorite = !boardGame?.isFavorite;
+
+      const response = await axios.patch(baseUrl + '/' + id, {
+        isFavorite: boardGame!.isFavorite,
+      });
+
+      if (response.data.error) console.error('deleteBoardGame error: ', response.data.error);
     },
   },
 });
