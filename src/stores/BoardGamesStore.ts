@@ -9,6 +9,17 @@ type BoardGamesStoreState = {
   sortType: string;
 };
 
+/**
+ * This Store can be used together with JSON-server package
+ *  Mac - should run without any issues.
+ *  Windows - may require changes to system security policies.
+ *  Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+ *
+ *  #Installation: npm install -g json-server
+ *
+ *  #Start server: json-server --watch .src/mock-data/db.json
+ *
+ *  */
 export const baseUrl = 'http://localhost:3000/boardGames';
 
 export const useBoardGamesStore = defineStore('boardGamesStore', {
