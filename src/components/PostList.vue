@@ -3,10 +3,12 @@ import { storeToRefs } from 'pinia';
 import ToggleMixin from '@/mixins/ToggleMixin';
 import { usePostStore } from '@/stores/PostStore';
 import { defineComponent, onMounted } from 'vue';
+import useCompositionMixin from '@/mixins/CompositionMixin';
 const postStore = usePostStore();
 const { page, postsList, totalPages } = storeToRefs(postStore);
 
 postStore.fetchPosts();
+const { handleButtonClick } = useCompositionMixin();
 
 const goToPage = (pageNumber: number) => {
   postStore.getPage(pageNumber);
@@ -46,6 +48,8 @@ defineComponent({
         </li>
       </ul>
     </div>
+
+    <button class="hook-button" @click="handleButtonClick">Click Hook</button>
 
     <ul class="post-list">
       <li class="post-item" v-for="post in postsList" :key="post.id">
@@ -100,5 +104,9 @@ defineComponent({
 
 .page-end-observer {
   height: 30px;
+}
+
+.hook-button {
+  margin-bottom: 20px;
 }
 </style>
